@@ -6,3 +6,5 @@
 export function holaMundo(cadena: string) {
   return cadena;
 }
+
+console.log(holaMundo("Hola Mundo"));

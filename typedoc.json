@@ -1,6 +1,6 @@
 {
   "entryPoints": [
-      "./src/holaMundo.ts",
+      "./src/index.ts",
   ],
   "out": "./docs" 
 }

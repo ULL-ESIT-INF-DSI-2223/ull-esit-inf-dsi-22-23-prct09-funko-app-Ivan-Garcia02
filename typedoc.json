@@ -1,6 +1,8 @@
 {
   "entryPoints": [
-      "./src/index.ts",
+      "./src/modificacion/procesador.ts",
+      "./src/modificacion/procesadorCSV.ts",
+      "./src/funkoApp/funko.ts"
   ],
   "out": "./docs" 
 }

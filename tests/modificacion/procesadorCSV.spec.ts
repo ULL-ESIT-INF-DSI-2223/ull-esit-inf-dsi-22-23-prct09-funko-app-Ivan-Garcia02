@@ -1,6 +1,7 @@
 import 'mocha';
 import { expect } from "chai";
 import { ProcesadorCSV } from "../../src/modificacion/procesadorCSV";
+import { Procesador } from "../../src/modificacion/procesador";
 
 describe('Tests para ProcesadorCSV', () => {
   it('Tests de creacion de un objeto', () => {

@@ -87,3 +87,6 @@ export class ProcesadorCSV extends Procesador {
     return elementos; 
   }
 }
+
+/*let procesador: Procesador = new ProcesadorCSV("mochila.csv")
+console.log(procesador.procesar());*/

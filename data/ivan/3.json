@@ -1,12 +1,12 @@
 {
   "ID": 3,
-  "nombre": "Iron Man",
-  "descripcion": "Funko Pop del superheroe Iron Man",
-  "tipo": "Pop!",
+  "nombre": "AquaMan",
+  "descripcion": "Funko Pop de Aquaman",
+  "tipo": "Pop! Rides",
   "genero": "Peliculas",
-  "franquicia": "Marvel",
+  "franquicia": "DC",
   "numeroFranquicia": 1,
-  "exclusivo": false,
-  "caractericticasEspeciales": "",
-  "valorMercado": 15.5
+  "exclusivo": true,
+  "caractericticasEspeciales": "Acuatico",
+  "valorMercado": 4.87
 }

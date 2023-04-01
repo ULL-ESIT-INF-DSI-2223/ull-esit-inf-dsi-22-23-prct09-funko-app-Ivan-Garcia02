@@ -1,12 +1,12 @@
 {
   "ID": 2,
-  "nombre": "Man",
-  "descripcion": "Funko Pop del superheroe Iron Man",
-  "tipo": "Vinil Soda",
+  "nombre": "Viuda Negra",
+  "descripcion": "Funko Pop de Viuda Negra",
+  "tipo": "Pop!",
   "genero": "Peliculas",
   "franquicia": "Marvel",
-  "numeroFranquicia": 1,
+  "numeroFranquicia": 2,
   "exclusivo": false,
-  "caractericticasEspeciales": "",
-  "valorMercado": 15.5
+  "caractericticasEspeciales": "Brilla",
+  "valorMercado": 5.2
 }

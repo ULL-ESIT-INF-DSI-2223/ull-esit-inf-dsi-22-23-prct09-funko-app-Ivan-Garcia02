@@ -1,8 +1,8 @@
 import chalk = require("chalk");
 
-export enum TipoFunko {Pop = 'Pop!', PopRides = 'Pop! Rides', VynilSoda = 'Vinil Soda', VynilGold = 'Vinil Gold'};
+export enum TipoFunko {Pop = 'Pop!', PopRides = 'Pop! Rides', VynilSoda = 'Vinil Soda', VynilGold = 'Vinil Gold', Regular = 'Regular'};
 export enum GeneroFunko {Animacion = 'Animacion', Peliculas = 'Peliculas', TV = 'TV', Videojuegos = 'Videojuegos', 
-                         Deportes = 'Deportes', Musica = 'Musica', Anime = 'Anime'};
+                         Deportes = 'Deportes', Musica = 'Musica', Anime = 'Anime', General = 'General'};
                   
 export class Funko {
   private _ID: number;
@@ -178,5 +178,38 @@ export class Funko {
   }
   set valorMercado(valorMercado: number) {
     this._valorMercado = valorMercado;
+  }
+}
+
+/**
+ * Función que convierte el tipo de funko de String a el enum TipoFunko
+ * @param type Tipo de Funko en string
+ * @returns el tipo de funko de la Enum
+ */
+export function convertTipoFunko(type: string) : TipoFunko {
+  switch (type) {
+    case TipoFunko.Pop: return TipoFunko.Pop;
+    case TipoFunko.PopRides: return TipoFunko.PopRides;
+    case TipoFunko.VynilGold: return TipoFunko.VynilGold;
+    case TipoFunko.VynilSoda: return TipoFunko.VynilSoda;
+    default: return TipoFunko.Regular
+  }
+}
+
+/**
+ * Función que convierte el genero de funko de String a el enum GeneroFunko
+ * @param type Genero de Funko en string
+ * @returns el genero de funko de la Enum
+ */
+export function convertGeneroFunko(gener: string) : GeneroFunko {
+  switch (gener) {
+    case GeneroFunko.Animacion: return GeneroFunko.Animacion;
+    case GeneroFunko.Peliculas: return GeneroFunko.Peliculas;
+    case GeneroFunko.TV: return GeneroFunko.TV;
+    case GeneroFunko.Videojuegos: return GeneroFunko.Videojuegos;
+    case GeneroFunko.Deportes: return GeneroFunko.Deportes;
+    case GeneroFunko.Musica: return GeneroFunko.Musica;
+    case GeneroFunko.Anime: return GeneroFunko.Anime;
+    default: return GeneroFunko.General
   }
 }

@@ -1,3 +1,5 @@
+import chalk = require("chalk");
+
 export enum TipoFunko {Pop = 'Pop!', PopRides = 'Pop! Rides', VynilSoda = 'Vinil Soda', VynilGold = 'Vinil Gold'};
 export enum GeneroFunko {Animacion = 'Animacion', Peliculas = 'Peliculas', TV = 'TV', Videojuegos = 'Videojuegos', 
                          Deportes = 'Deportes', Musica = 'Musica', Anime = 'Anime'};
@@ -39,6 +41,33 @@ export class Funko {
     this._exclusivo = exclusivo;
     this._caracteristicasEspeciales = caracteristicasEspeciales;
     this._valorMercado = valorMercado;
+  }
+
+  /**
+   * Método para mostrar la información de un Funko concreto, con un color para el valor de mercado
+   */
+  mostrarFunko() {
+    console.log(`ID: ${this._ID}`);
+    console.log(`Nombre: ${this._nombre}`);
+    console.log(`Descripción: ${this._descripcion}`);
+    console.log(`Tipo: ${this._tipo}`);
+    console.log(`Genero: ${this._genero}`);
+    console.log(`Franquicia: ${this._franquicia}`);
+    console.log(`Número: ${this._numeroFranquicia}`);
+    console.log(`Exclusivo: ${this._exclusivo}`);
+    console.log(`Características especiales: ${this._caracteristicasEspeciales}`);
+    if (this._valorMercado > 0 && this._valorMercado <= 5) {
+      console.log(`Valor de mercado: ` + chalk.red(`${this._valorMercado}`));
+    }
+    else if (this._valorMercado > 5 && this._valorMercado <= 15) {
+      console.log(`Valor de mercado: ` + chalk.yellow(`${this._valorMercado}`));
+    }
+    else if (this._valorMercado > 15 && this._valorMercado <= 30) {
+      console.log(`Valor de mercado: ` + chalk.blue(`${this._valorMercado}`));
+    }
+    else if (this._valorMercado > 30) {
+      console.log(`Valor de mercado: ` + chalk.green(`${this._valorMercado}`));
+    }
   }
 
   /** 

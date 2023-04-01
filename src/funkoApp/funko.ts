@@ -1,6 +1,6 @@
 import chalk = require("chalk");
 
-export enum TipoFunko {Pop = 'Pop!', PopRides = 'Pop! Rides', VynilSoda = 'Vinil Soda', VynilGold = 'Vinil Gold', Regular = 'Regular'};
+export enum TipoFunko {Pop = 'Pop!', PopRides = 'Pop! Rides', VynilSoda = 'Vynil Soda', VynilGold = 'Vynil Gold', Regular = 'Regular'};
 export enum GeneroFunko {Animacion = 'Animacion', Peliculas = 'Peliculas', TV = 'TV', Videojuegos = 'Videojuegos', 
                          Deportes = 'Deportes', Musica = 'Musica', Anime = 'Anime', General = 'General'};
                   

@@ -1,6 +1,6 @@
 import 'mocha'
 import { expect } from "chai";
-import { Funko, TipoFunko, GeneroFunko } from "../../src/funkoApp/funko";
+import { Funko, TipoFunko, GeneroFunko, convertGeneroFunko, convertTipoFunko } from "../../src/funkoApp/funko";
 
 describe('Tests para la clase Funko', () => {
   it('Se puede crear un objeto de la clase Funko', () => {
@@ -57,4 +57,37 @@ describe('Tests para la clase Funko', () => {
     expect(funkoIronMan.valorMercado).to.be.eql(15.5);
     expect(funkoIronMan.valorMercado = 10.8).to.be.eql(10.8);
   })
+
+  it("Se puede mostrar un funko", () => {
+    let funkoIronMan1: Funko = new Funko(1, "Iron Man", "Funko Pop del superheroe IronMan", TipoFunko.Pop, GeneroFunko.Peliculas, "Marvel", 1, false, "", 4.5);
+    let funkoIronMan2: Funko = new Funko(1, "Iron Man", "Funko Pop del superheroe IronMan", TipoFunko.Pop, GeneroFunko.Peliculas, "Marvel", 1, false, "", 10.5);
+    let funkoIronMan3: Funko = new Funko(1, "Iron Man", "Funko Pop del superheroe IronMan", TipoFunko.Pop, GeneroFunko.Peliculas, "Marvel", 1, false, "", 20.5);
+    let funkoIronMan4: Funko = new Funko(1, "Iron Man", "Funko Pop del superheroe IronMan", TipoFunko.Pop, GeneroFunko.Peliculas, "Marvel", 1, false, "", 31);
+    expect(funkoIronMan1.mostrarFunko()).to.be.undefined
+    expect(funkoIronMan2.mostrarFunko()).to.be.undefined
+    expect(funkoIronMan3.mostrarFunko()).to.be.undefined
+    expect(funkoIronMan4.mostrarFunko()).to.be.undefined
+  })
 })
+
+describe('Tests para los convertidores', () => {
+  it('Tests para la función convertTipoFunko', () => {
+    expect(convertTipoFunko('Pop!')).to.be.eql(TipoFunko.Pop);
+    expect(convertTipoFunko('Pop! Rides')).to.be.eql(TipoFunko.PopRides);
+    expect(convertTipoFunko('Vynil Soda')).to.be.eql(TipoFunko.VynilSoda);
+    expect(convertTipoFunko('Vynil Gold')).to.be.eql(TipoFunko.VynilGold);
+    expect(convertTipoFunko('Regular')).to.be.eql(TipoFunko.Regular);
+  })
+
+  it('Tests para la función convertGeneroFunko', () => {
+    expect(convertGeneroFunko('Animacion')).to.be.eql(GeneroFunko.Animacion);
+    expect(convertGeneroFunko('Peliculas')).to.be.eql(GeneroFunko.Peliculas);
+    expect(convertGeneroFunko('TV')).to.be.eql(GeneroFunko.TV);
+    expect(convertGeneroFunko('Videojuegos')).to.be.eql(GeneroFunko.Videojuegos);
+    expect(convertGeneroFunko('Deportes')).to.be.eql(GeneroFunko.Deportes);
+    expect(convertGeneroFunko('Musica')).to.be.eql(GeneroFunko.Musica);
+    expect(convertGeneroFunko('Anime')).to.be.eql(GeneroFunko.Anime);
+    expect(convertGeneroFunko('General')).to.be.eql(GeneroFunko.General);
+  })
+})
+

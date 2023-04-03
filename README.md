@@ -108,6 +108,13 @@ Ahora si pasamos a definir los métodos para añadir, eliminar, modificar, lista
 
 - **Mostrar:** Para este método comprobamos con la el método `existeID`, que el ID del funko existe para asi mostrarlo con el método del funko concreto `mostrarFunko()`. Si todo ha ido bien y el ID existía, se emite un mensaje informativo en verde por la consola, y en caso contrario, se mostrará un mensaje de error en rojo por la consola, para ello usamos el paquete `chalk`.
 
+#### funko-app.ts
+En este fichero definiremos el codigo encargado de la interación con el usuario a través de la línea de comandos, para ello vamos a hacer uso del paquete `yargs`.
+
+Vamos a definir los 5 opciones que permite nuestra aplicación, añadir, eliminar, modificar, listar y mostrar los funkos. Para ello usamos el `.command`. Tanto para el añadir como para modificar pedimos por parametros el usuario, y todos los elementos del funko a añadir o modificar, para a continuación, crear el objeto `FunkoCollection` y llamar al método correspondiente `add` o `modify`.
+
+Para el caso de eliminar y mostrar un funko concreto, solo pediremos el usuario y el ID, para despues llamar a los métodos `remove` y `show`, Y para la opción de listar todos los funkos solo pediremos el usuario.
+
 
 ## Ejercicio Modificación
 
@@ -115,9 +122,9 @@ Ahora si pasamos a definir los métodos para añadir, eliminar, modificar, lista
 
 
 ## Conclusiones
-En esta práctica hemos realizado varios ejercicios con los que hemos practicado los conceptos explicados en clase, clases e interfaces genéricas en TypeScript, además de los principios SOLID.
+En esta práctica hemos realizado varios ejercicios con los que hemos practicado los conceptos explicados en clase, sobre Node.js, la API síncrona proporcionada por Node.js para trabajar con el sistema de ficheros y los paquetes `yargs` y `chalk`.
 
-En concreto, he practicado más profundamente la herencia entre clases abstractas genéricas, las propiedades de los atributos como *protected* o *readonly*. Y el cubrimiento de código con la herramienta Coveralls.
+En concreto, he practicado más profundamente las funciones de la API sincrona de Node.js, `writefileSync`, `readfileSync`, `existsSync`, `mkdirSync` y `rmSync`.
 
 ## Bibliografía
 - [Guion de la práctica](https://ull-esit-inf-dsi-2223.github.io/prct09-filesystem-funko-app/)

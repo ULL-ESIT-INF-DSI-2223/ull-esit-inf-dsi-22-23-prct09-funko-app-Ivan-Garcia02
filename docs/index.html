@@ -103,6 +103,13 @@
 </li>
 </ul>
 
+<a href="#funko-appts" id="funko-appts" style="color: inherit; text-decoration: none;">
+  <h4>funko-app.ts</h4>
+</a>
+<p>En este fichero definiremos el codigo encargado de la interación con el usuario a través de la línea de comandos, para ello vamos a hacer uso del paquete <code>yargs</code>.</p>
+<p>Vamos a definir los 5 opciones que permite nuestra aplicación, añadir, eliminar, modificar, listar y mostrar los funkos. Para ello usamos el <code>.command</code>. Tanto para el añadir como para modificar pedimos por parametros el usuario, y todos los elementos del funko a añadir o modificar, para a continuación, crear el objeto <code>FunkoCollection</code> y llamar al método correspondiente <code>add</code> o <code>modify</code>.</p>
+<p>Para el caso de eliminar y mostrar un funko concreto, solo pediremos el usuario y el ID, para despues llamar a los métodos <code>remove</code> y <code>show</code>, Y para la opción de listar todos los funkos solo pediremos el usuario.</p>
+
 <a href="#ejercicio-modificación" id="ejercicio-modificación" style="color: inherit; text-decoration: none;">
   <h2>Ejercicio Modificación</h2>
 </a>

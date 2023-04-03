@@ -117,6 +117,50 @@ Para el caso de eliminar y mostrar un funko concreto, solo pediremos el usuario 
 
 
 ## Ejercicio Modificación
+En este modificación nos pedian implementar un codigo capaz de procesar los datos del problema de la mochila, dados los fichero en CSV y JSON, haciendo uso del patron `template` y de la API sincrona de Node.js para trabajar con el sistema de ficheros.
+
+#### procesador.ts
+Para ello lo primero sera definir la clase plantilla `Procesador`, y el método plantilla que va a ser:
+```typescript
+public procesar() {
+  const capacidad = this.leerCapacidad();
+  this.afterCapacidad(capacidad);
+
+  const numeroElementos = this.leerNumeroElementos();
+  this.afterNumElementos(numeroElementos);
+
+  const elementos = this.leerElementos();
+  this.afterElementos(elementos);
+
+  elementos.forEach(elemento => {
+    this.beneficios.push(elemento[0]);
+    this.pesos.push(elemento[1]);
+  });
+
+  return [this.beneficios, this.pesos];
+}
+```
+
+Este método va a llamar a varios métodos que tendran que ser definidos en las clase que hereden, por lo que los siguientes métodos seran abstractos:
+```typescript
+protected abstract leerCapacidad(): number;
+protected abstract leerNumeroElementos(): number;
+protected abstract leerElementos(): ElementoMochila[];
+```
+
+Tambien en esta clase definimos varios métodos `hook` para comprobar el comportamiento del método plantilla, estos imprimiran por pantalla los valores que devuelve los métodos abstractos en estos `hooks` son lo siguientes:
+```typescript
+afterCapacidad(capacidad: number) {
+  console.log(`La capacidad de la mochila es: ${capacidad}`);
+}
+afterNumElementos(numeroElementos: number) {
+  console.log(`El número de elementos de la mochila es: ${numeroElementos}`);
+}
+afterElementos(elementos: ElementoMochila[]) {
+  console.log(`Los elementos de la mochila son: ${elementos}`);
+}
+```
+
 
 
 

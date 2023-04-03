@@ -23,10 +23,11 @@
 - [Bibliografía](#bibliografía)
 
 ## Objetivos de la práctica
-En esta práctica vamos a profundizar en los conceptos explicados en clase, sobre Node.js, el API síncrona proporcionada por Node.js para trabajar con el sistema de ficheros y los paquetes `yargs` y `chalk`.
+En esta práctica vamos a profundizar en los conceptos explicados en clase, sobre Node.js, la API síncrona proporcionada por Node.js para trabajar con el sistema de ficheros y los paquetes `yargs` y `chalk`.
 
 ## Ejercicios propuestos
 ### Funko App
+#### funko.ts
 Para este ejercicio nos pedian implementar una aplicación que permita almacenar información de los Funko Pops pertenecientes a la colección de un usuario. En concreto, el sistema permitirá añadir, modificar, eliminar, listar y leer la información asociada a un Funko. La información de cada Funko se almacenará como un JSON en el sistema de ficheros de la máquina donde se ejecute la aplicación. Además, solo se podrá interactuar con la aplicación desde la línea de comandos con el paquete `yargs`.
 
 Lo primero que hemos hecho ha sido crear la estructura de datos encargada de almacenar un funko, para esto definimos en el fichero funko.ts, la clase `Funko`, que tendra los siguientes atributos:
@@ -65,6 +66,48 @@ function convertTipoFunko(type: string) : TipoFunko
 function convertGeneroFunko(gener: string) : GeneroFunko
 ```
 
+#### funkoCollection.ts
+Este fichero sera el encargado de almacenar la clase `FunkoCollection` que se encargara de gestionar la colección de Funkos, los atributos de esta clase son:
+```typescript
+usuario: string; // Usuario propetario de la colección
+funkoCollection: Funko[]; // Colección de funkos
+```
+
+Lo primero que definimos en esta clase sera el constructor que recibirá como parametro el nombre del propietario, y buscará su carpeta en `data`, para cargar los funkos guardados en los ficheros `.json`, en la `funkoCollection`.
+```typescript
+constructor(usuario: string) {
+    this._usuario =  usuario;
+    this._funkoCollection = [];
+
+    if (existsSync('./data/' + usuario)) {
+      const files = readdirSync('./data/' + usuario);
+      files.forEach(funkoFile => {
+        let data = readFileSync('./data/' + usuario + '/' + funkoFile, 'utf8');
+        let dataJson =  JSON.parse(data);
+        
+        let funko: Funko = new Funko (dataJson.ID, dataJson.nombre, dataJson.descripcion, dataJson.tipo, dataJson.genero, dataJson.franquicia, dataJson.numeroFranquicia, dataJson.exclusivo, dataJson.caractericticasEspeciales, dataJson.valorMercado);
+        this._funkoCollection.push(funko);
+      })
+    }
+  }
+```
+
+A continuación, vamos a definir los métodos para añadir, eliminar, modificar, listar y mostrar los funkos. Pero antes vamos a dafinir dos métodos que van a ser usados por estos otros que son:
+`existeID(ID: number) : number`: Método para saber si existe un ID y para saber su índice, en caso de que no exista devuelve -1.
+
+`private writeFunkoFile(...)`: Método privado encargado de cargar un Funko a un fichero JSON. Para ello hace uso de las funciones de la API sincrona de Node.js, `existsSync()`, para comprobar que existe el directorio de nombre propietario, para si no es así crearlo con `mkdirSync()`, para al final escribir en los ficheros `.json`, con la función `writeFileSync()`.
+
+Ahora si pasamos a definir los métodos para añadir, eliminar, modificar, listar y mostrar los funkos:
+- **Añadir:** Para este método comprobamos con la el método `existeID`, que el ID del funko no existe para asi crearlo y meterlo en el array, y llamar al método `writeFunkoFile` para hacerlo persistente. Si todo ha ido bien y el ID no existía, se emite un mensaje informativo en verde por la consola, y en caso contrario, se mostrará un mensaje de error en rojo por la consola, para ello usamos el paquete `chalk`.
+
+- **Modificar:** Para este método comprobamos con la el método `existeID`, que el ID del funko existe para asi modificar cada uno de sus atributos y llamar al método `writeFunkoFile` para hacerlo persistente. Si todo ha ido bien y el ID existía, se emite un mensaje informativo en verde por la consola, y en caso contrario, se mostrará un mensaje de error en rojo por la consola, para ello usamos el paquete `chalk`.
+
+- **Eliminar:** Para este método comprobamos con la el método `existeID`, que el ID del funko existe para asi eliminarlo con el método `splice` y con la función de la API sincrona de Node.js, `rmSync()` eliminar el fichero de ese funko. Si todo ha ido bien y el ID existía, se emite un mensaje informativo en verde por la consola, y en caso contrario, se mostrará un mensaje de error en rojo por la consola, para ello usamos el paquete `chalk`.
+
+- **Listar:** Este método listará todos los funkos de la colección, para ello llama al método de cada funko `mostrarFunko()`.
+
+- **Mostrar:** Para este método comprobamos con la el método `existeID`, que el ID del funko existe para asi mostrarlo con el método del funko concreto `mostrarFunko()`. Si todo ha ido bien y el ID existía, se emite un mensaje informativo en verde por la consola, y en caso contrario, se mostrará un mensaje de error en rojo por la consola, para ello usamos el paquete `chalk`.
+
 
 ## Ejercicio Modificación
 
@@ -77,5 +120,5 @@ En esta práctica hemos realizado varios ejercicios con los que hemos practicado
 En concreto, he practicado más profundamente la herencia entre clases abstractas genéricas, las propiedades de los atributos como *protected* o *readonly*. Y el cubrimiento de código con la herramienta Coveralls.
 
 ## Bibliografía
-- [Guion de la práctica](https://ull-esit-inf-dsi-2223.github.io/prct06-generics-solid/)
-- [Apuntes de la asignatura](https://ull-esit-inf-dsi-2223.github.io/typescript-theory/)
+- [Guion de la práctica](https://ull-esit-inf-dsi-2223.github.io/prct09-filesystem-funko-app/)
+- [Apuntes de la asignatura](https://ull-esit-inf-dsi-2223.github.io/nodejs-theory/)

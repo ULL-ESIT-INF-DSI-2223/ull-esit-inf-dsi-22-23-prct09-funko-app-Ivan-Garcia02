@@ -16,6 +16,13 @@
 <a href="#práctica-9---aplicación-de-registro-de-funko-pops" id="práctica-9---aplicación-de-registro-de-funko-pops" style="color: inherit; text-decoration: none;">
   <h1>Práctica 9 - Aplicación de registro de Funko Pops</h1>
 </a>
+
+<a href="#desarrollo-de-sistemas-informáticos" id="desarrollo-de-sistemas-informáticos" style="color: inherit; text-decoration: none;">
+  <h2>Desarrollo de Sistemas Informáticos</h2>
+</a>
+<blockquote>
+<p><strong>Nombre:</strong> Iván García González <strong>Correo:</strong> <a href="mailto:alu0101388786@ull.edu.es">alu0101388786@ull.edu.es</a></p>
+</blockquote>
 <p align="center">
   <a href="https://coveralls.io/github/ULL-ESIT-INF-DSI-2223/ull-esit-inf-dsi-22-23-prct09-funko-app-Ivan-Garcia02?branch=main">
     <img alt="Coverage Status" src="https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2223/ull-esit-inf-dsi-22-23-prct09-funko-app-Ivan-Garcia02/badge.svg?branch=main">
@@ -26,7 +33,94 @@
   <a href="https://sonarcloud.io/summary/new_code?id=ULL-ESIT-INF-DSI-2223_ull-esit-inf-dsi-22-23-prct09-funko-app-Ivan-Garcia02">
     <img alt="Quality Gate Status" src="https://sonarcloud.io/api/project_badges/measure?project=ULL-ESIT-INF-DSI-2223_ull-esit-inf-dsi-22-23-prct09-funko-app-Ivan-Garcia02&metric=alert_status">
   </a>
-</p></div></div>
+</p>
+
+
+<a href="#índice" id="índice" style="color: inherit; text-decoration: none;">
+  <h2>Índice</h2>
+</a>
+<ul>
+<li><a href="#objetivos-de-la-pr%C3%A1ctica">Objetivos</a></li>
+<li><a href="#ejercicios-propuestos">Ejercicios propuestos</a><ul>
+<li><a href="#funko-app">Funko App</a></li>
+</ul>
+</li>
+<li><a href="#ejercicio-modificaci%C3%B3n">Ejercicio modificación</a></li>
+<li><a href="#conclusiones">Conclusiones</a></li>
+<li><a href="#bibliograf%C3%ADa">Bibliografía</a></li>
+</ul>
+
+<a href="#objetivos-de-la-práctica" id="objetivos-de-la-práctica" style="color: inherit; text-decoration: none;">
+  <h2>Objetivos de la práctica</h2>
+</a>
+<p>En esta práctica vamos a profundizar en los conceptos explicados en clase, sobre Node.js, la API síncrona proporcionada por Node.js para trabajar con el sistema de ficheros y los paquetes <code>yargs</code> y <code>chalk</code>.</p>
+
+<a href="#ejercicios-propuestos" id="ejercicios-propuestos" style="color: inherit; text-decoration: none;">
+  <h2>Ejercicios propuestos</h2>
+</a>
+
+<a href="#funko-app" id="funko-app" style="color: inherit; text-decoration: none;">
+  <h3>Funko App</h3>
+</a>
+
+<a href="#funkots" id="funkots" style="color: inherit; text-decoration: none;">
+  <h4>funko.ts</h4>
+</a>
+<p>Para este ejercicio nos pedian implementar una aplicación que permita almacenar información de los Funko Pops pertenecientes a la colección de un usuario. En concreto, el sistema permitirá añadir, modificar, eliminar, listar y leer la información asociada a un Funko. La información de cada Funko se almacenará como un JSON en el sistema de ficheros de la máquina donde se ejecute la aplicación. Además, solo se podrá interactuar con la aplicación desde la línea de comandos con el paquete <code>yargs</code>.</p>
+<p>Lo primero que hemos hecho ha sido crear la estructura de datos encargada de almacenar un funko, para esto definimos en el fichero funko.ts, la clase <code>Funko</code>, que tendra los siguientes atributos:</p>
+<pre><code class="language-typescript"><span class="hl-0">ID</span><span class="hl-1"> </span><span class="hl-2">// Identificador único del Funko</span><br/><span class="hl-3">nombre</span><span class="hl-1"> </span><span class="hl-2">// Nombre del Funko</span><br/><span class="hl-3">descripcion</span><span class="hl-1"> </span><span class="hl-2">// Descripcion del Funko</span><br/><span class="hl-3">tipo</span><span class="hl-1"> </span><span class="hl-2">// Tipo, Pop!, Pop! Rides, Vynil Soda o Vynil Gold, entre otros</span><br/><span class="hl-3">genero</span><span class="hl-1"> </span><span class="hl-2">// Genero, Animación, Películas y TV, Videojuegos, Deportes, Música o Ánime, entre otras</span><br/><span class="hl-3">franquicia</span><span class="hl-1"> </span><span class="hl-2">// Franquicia, The Big Bang Theory, Game of Thrones, Sonic The Hedgehog o Marvel: Guardians of the Galaxy, entre otras.</span><br/><span class="hl-3">numeroFranquicia</span><span class="hl-1"> </span><span class="hl-2">// Número identificativo del Funko dentro de la franquicia correspondiente</span><br/><span class="hl-3">exclusivo</span><span class="hl-1"> </span><span class="hl-2">// Verdadero en el caso de que el Funko sea exclusivo o falso en caso contrario</span><br/><span class="hl-3">caracteristicasEspeciales</span><span class="hl-1"> </span><span class="hl-2">// Característica especiales del Funko como, por ejemplo, si brilla en la oscuridad o si su cabeza balancea</span><br/><span class="hl-3">valorMercado</span><span class="hl-1"> </span><span class="hl-2">// Precio del Funko</span>
+</code></pre>
+<p>Esta clase tendra los Getters y Setters correpondientes a cada atributo de la clase. Ademas definimos un método encargado de mostrar un Funko por consola, <code>mostrarFunko()</code>, en este método haremos uso del paquete <code>chalk</code>, para mostar el valor de mercado con distintos colores según los rangos establecidos.</p>
+<pre><code class="language-typescript"><span class="hl-4">if</span><span class="hl-1"> (</span><span class="hl-5">this</span><span class="hl-1">.</span><span class="hl-3">_valorMercado</span><span class="hl-1"> &gt; </span><span class="hl-6">0</span><span class="hl-1"> &amp;&amp; </span><span class="hl-5">this</span><span class="hl-1">.</span><span class="hl-3">_valorMercado</span><span class="hl-1"> &lt;= </span><span class="hl-6">5</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-3">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-8">`Valor de mercado: `</span><span class="hl-1"> + </span><span class="hl-3">chalk</span><span class="hl-1">.</span><span class="hl-7">red</span><span class="hl-1">(</span><span class="hl-8">`</span><span class="hl-5">${</span><span class="hl-5">this</span><span class="hl-9">.</span><span class="hl-3">_valorMercado</span><span class="hl-5">}</span><span class="hl-8">`</span><span class="hl-1">));</span><br/><span class="hl-1">}</span><br/><span class="hl-4">else</span><span class="hl-1"> </span><span class="hl-4">if</span><span class="hl-1"> (</span><span class="hl-5">this</span><span class="hl-1">.</span><span class="hl-3">_valorMercado</span><span class="hl-1"> &gt; </span><span class="hl-6">5</span><span class="hl-1"> &amp;&amp; </span><span class="hl-5">this</span><span class="hl-1">.</span><span class="hl-3">_valorMercado</span><span class="hl-1"> &lt;= </span><span class="hl-6">15</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-3">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-8">`Valor de mercado: `</span><span class="hl-1"> + </span><span class="hl-3">chalk</span><span class="hl-1">.</span><span class="hl-7">yellow</span><span class="hl-1">(</span><span class="hl-8">`</span><span class="hl-5">${</span><span class="hl-5">this</span><span class="hl-9">.</span><span class="hl-3">_valorMercado</span><span class="hl-5">}</span><span class="hl-8">`</span><span class="hl-1">));</span><br/><span class="hl-1">}</span><br/><span class="hl-4">else</span><span class="hl-1"> </span><span class="hl-4">if</span><span class="hl-1"> (</span><span class="hl-5">this</span><span class="hl-1">.</span><span class="hl-3">_valorMercado</span><span class="hl-1"> &gt; </span><span class="hl-6">15</span><span class="hl-1"> &amp;&amp; </span><span class="hl-5">this</span><span class="hl-1">.</span><span class="hl-3">_valorMercado</span><span class="hl-1"> &lt;= </span><span class="hl-6">30</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-3">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-8">`Valor de mercado: `</span><span class="hl-1"> + </span><span class="hl-3">chalk</span><span class="hl-1">.</span><span class="hl-7">blue</span><span class="hl-1">(</span><span class="hl-8">`</span><span class="hl-5">${</span><span class="hl-5">this</span><span class="hl-9">.</span><span class="hl-3">_valorMercado</span><span class="hl-5">}</span><span class="hl-8">`</span><span class="hl-1">));</span><br/><span class="hl-1">}</span><br/><span class="hl-4">else</span><span class="hl-1"> </span><span class="hl-4">if</span><span class="hl-1"> (</span><span class="hl-5">this</span><span class="hl-1">.</span><span class="hl-3">_valorMercado</span><span class="hl-1"> &gt; </span><span class="hl-6">30</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-3">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-8">`Valor de mercado: `</span><span class="hl-1"> + </span><span class="hl-3">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-8">`</span><span class="hl-5">${</span><span class="hl-5">this</span><span class="hl-9">.</span><span class="hl-3">_valorMercado</span><span class="hl-5">}</span><span class="hl-8">`</span><span class="hl-1">));</span><br/><span class="hl-1">}</span>
+</code></pre>
+<p>Por último en este fichero definimos dos funciones externas a la clase encargadas de convertir una string a un tipo de uno de los dos enumerables, según los atributos, <em>tipo</em> y <em>genero</em> de la clase, para ello hacemos uso de un <em>switch-case</em>.</p>
+<pre><code class="language-typescript"><span class="hl-5">function</span><span class="hl-1"> </span><span class="hl-7">convertTipoFunko</span><span class="hl-1">(</span><span class="hl-3">type</span><span class="hl-1">: </span><span class="hl-10">string</span><span class="hl-1">) : </span><span class="hl-10">TipoFunko</span><br/><span class="hl-5">function</span><span class="hl-1"> </span><span class="hl-7">convertGeneroFunko</span><span class="hl-1">(</span><span class="hl-3">gener</span><span class="hl-1">: </span><span class="hl-10">string</span><span class="hl-1">) : </span><span class="hl-10">GeneroFunko</span>
+</code></pre>
+
+<a href="#funkocollectionts" id="funkocollectionts" style="color: inherit; text-decoration: none;">
+  <h4>funkoCollection.ts</h4>
+</a>
+<p>Este fichero sera el encargado de almacenar la clase <code>FunkoCollection</code> que se encargara de gestionar la colección de Funkos, los atributos de esta clase son:</p>
+<pre><code class="language-typescript"><span class="hl-11">usuario</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">; </span><span class="hl-2">// Usuario propetario de la colección</span><br/><span class="hl-11">funkoCollection</span><span class="hl-1">: </span><span class="hl-3">Funko</span><span class="hl-1">[]; </span><span class="hl-2">// Colección de funkos</span>
+</code></pre>
+<p>Lo primero que definimos en esta clase sera el constructor que recibirá como parametro el nombre del propietario, y buscará su carpeta en <code>data</code>, para cargar los funkos guardados en los ficheros <code>.json</code>, en la <code>funkoCollection</code>.</p>
+<pre><code class="language-typescript"><span class="hl-7">constructor</span><span class="hl-1">(</span><span class="hl-3">usuario</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">) {</span><br/><span class="hl-1">    </span><span class="hl-5">this</span><span class="hl-1">.</span><span class="hl-3">_usuario</span><span class="hl-1"> =  </span><span class="hl-3">usuario</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-5">this</span><span class="hl-1">.</span><span class="hl-3">_funkoCollection</span><span class="hl-1"> = [];</span><br/><br/><span class="hl-1">    </span><span class="hl-4">if</span><span class="hl-1"> (</span><span class="hl-7">existsSync</span><span class="hl-1">(</span><span class="hl-8">&#39;./data/&#39;</span><span class="hl-1"> + </span><span class="hl-3">usuario</span><span class="hl-1">)) {</span><br/><span class="hl-1">      </span><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-0">files</span><span class="hl-1"> = </span><span class="hl-7">readdirSync</span><span class="hl-1">(</span><span class="hl-8">&#39;./data/&#39;</span><span class="hl-1"> + </span><span class="hl-3">usuario</span><span class="hl-1">);</span><br/><span class="hl-1">      </span><span class="hl-3">files</span><span class="hl-1">.</span><span class="hl-7">forEach</span><span class="hl-1">(</span><span class="hl-3">funkoFile</span><span class="hl-1"> </span><span class="hl-5">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-5">let</span><span class="hl-1"> </span><span class="hl-3">data</span><span class="hl-1"> = </span><span class="hl-7">readFileSync</span><span class="hl-1">(</span><span class="hl-8">&#39;./data/&#39;</span><span class="hl-1"> + </span><span class="hl-3">usuario</span><span class="hl-1"> + </span><span class="hl-8">&#39;/&#39;</span><span class="hl-1"> + </span><span class="hl-3">funkoFile</span><span class="hl-1">, </span><span class="hl-8">&#39;utf8&#39;</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-5">let</span><span class="hl-1"> </span><span class="hl-3">dataJson</span><span class="hl-1"> =  </span><span class="hl-0">JSON</span><span class="hl-1">.</span><span class="hl-7">parse</span><span class="hl-1">(</span><span class="hl-3">data</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><br/><span class="hl-1">        </span><span class="hl-5">let</span><span class="hl-1"> </span><span class="hl-3">funko</span><span class="hl-1">: </span><span class="hl-10">Funko</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-7">Funko</span><span class="hl-1"> (</span><span class="hl-3">dataJson</span><span class="hl-1">.</span><span class="hl-0">ID</span><span class="hl-1">, </span><span class="hl-3">dataJson</span><span class="hl-1">.</span><span class="hl-3">nombre</span><span class="hl-1">, </span><span class="hl-3">dataJson</span><span class="hl-1">.</span><span class="hl-3">descripcion</span><span class="hl-1">, </span><span class="hl-3">dataJson</span><span class="hl-1">.</span><span class="hl-3">tipo</span><span class="hl-1">, </span><span class="hl-3">dataJson</span><span class="hl-1">.</span><span class="hl-3">genero</span><span class="hl-1">, </span><span class="hl-3">dataJson</span><span class="hl-1">.</span><span class="hl-3">franquicia</span><span class="hl-1">, </span><span class="hl-3">dataJson</span><span class="hl-1">.</span><span class="hl-3">numeroFranquicia</span><span class="hl-1">, </span><span class="hl-3">dataJson</span><span class="hl-1">.</span><span class="hl-3">exclusivo</span><span class="hl-1">, </span><span class="hl-3">dataJson</span><span class="hl-1">.</span><span class="hl-3">caractericticasEspeciales</span><span class="hl-1">, </span><span class="hl-3">dataJson</span><span class="hl-1">.</span><span class="hl-3">valorMercado</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-5">this</span><span class="hl-1">.</span><span class="hl-3">_funkoCollection</span><span class="hl-1">.</span><span class="hl-7">push</span><span class="hl-1">(</span><span class="hl-3">funko</span><span class="hl-1">);</span><br/><span class="hl-1">      })</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">  }</span>
+</code></pre>
+<p>A continuación, vamos a definir los métodos para añadir, eliminar, modificar, listar y mostrar los funkos. Pero antes vamos a dafinir dos métodos que van a ser usados por estos otros que son:
+<code>existeID(ID: number) : number</code>: Método para saber si existe un ID y para saber su índice, en caso de que no exista devuelve -1.</p>
+<p><code>private writeFunkoFile(...)</code>: Método privado encargado de cargar un Funko a un fichero JSON. Para ello hace uso de las funciones de la API sincrona de Node.js, <code>existsSync()</code>, para comprobar que existe el directorio de nombre propietario, para si no es así crearlo con <code>mkdirSync()</code>, para al final escribir en los ficheros <code>.json</code>, con la función <code>writeFileSync()</code>.</p>
+<p>Ahora si pasamos a definir los métodos para añadir, eliminar, modificar, listar y mostrar los funkos:</p>
+<ul>
+<li><p><strong>Añadir:</strong> Para este método comprobamos con la el método <code>existeID</code>, que el ID del funko no existe para asi crearlo y meterlo en el array, y llamar al método <code>writeFunkoFile</code> para hacerlo persistente. Si todo ha ido bien y el ID no existía, se emite un mensaje informativo en verde por la consola, y en caso contrario, se mostrará un mensaje de error en rojo por la consola, para ello usamos el paquete <code>chalk</code>.</p>
+</li>
+<li><p><strong>Modificar:</strong> Para este método comprobamos con la el método <code>existeID</code>, que el ID del funko existe para asi modificar cada uno de sus atributos y llamar al método <code>writeFunkoFile</code> para hacerlo persistente. Si todo ha ido bien y el ID existía, se emite un mensaje informativo en verde por la consola, y en caso contrario, se mostrará un mensaje de error en rojo por la consola, para ello usamos el paquete <code>chalk</code>.</p>
+</li>
+<li><p><strong>Eliminar:</strong> Para este método comprobamos con la el método <code>existeID</code>, que el ID del funko existe para asi eliminarlo con el método <code>splice</code> y con la función de la API sincrona de Node.js, <code>rmSync()</code> eliminar el fichero de ese funko. Si todo ha ido bien y el ID existía, se emite un mensaje informativo en verde por la consola, y en caso contrario, se mostrará un mensaje de error en rojo por la consola, para ello usamos el paquete <code>chalk</code>.</p>
+</li>
+<li><p><strong>Listar:</strong> Este método listará todos los funkos de la colección, para ello llama al método de cada funko <code>mostrarFunko()</code>.</p>
+</li>
+<li><p><strong>Mostrar:</strong> Para este método comprobamos con la el método <code>existeID</code>, que el ID del funko existe para asi mostrarlo con el método del funko concreto <code>mostrarFunko()</code>. Si todo ha ido bien y el ID existía, se emite un mensaje informativo en verde por la consola, y en caso contrario, se mostrará un mensaje de error en rojo por la consola, para ello usamos el paquete <code>chalk</code>.</p>
+</li>
+</ul>
+
+<a href="#ejercicio-modificación" id="ejercicio-modificación" style="color: inherit; text-decoration: none;">
+  <h2>Ejercicio Modificación</h2>
+</a>
+
+<a href="#conclusiones" id="conclusiones" style="color: inherit; text-decoration: none;">
+  <h2>Conclusiones</h2>
+</a>
+<p>En esta práctica hemos realizado varios ejercicios con los que hemos practicado los conceptos explicados en clase, clases e interfaces genéricas en TypeScript, además de los principios SOLID.</p>
+<p>En concreto, he practicado más profundamente la herencia entre clases abstractas genéricas, las propiedades de los atributos como <em>protected</em> o <em>readonly</em>. Y el cubrimiento de código con la herramienta Coveralls.</p>
+
+<a href="#bibliografía" id="bibliografía" style="color: inherit; text-decoration: none;">
+  <h2>Bibliografía</h2>
+</a>
+<ul>
+<li><a href="https://ull-esit-inf-dsi-2223.github.io/prct09-filesystem-funko-app/">Guion de la práctica</a></li>
+<li><a href="https://ull-esit-inf-dsi-2223.github.io/nodejs-theory/">Apuntes de la asignatura</a></li>
+</ul>
+</div></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">

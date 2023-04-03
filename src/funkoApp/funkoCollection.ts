@@ -151,7 +151,7 @@ export class FunkoCollection {
   }
 
   /**
-   * Método encargado de cargar en Funko a un fichero JSON
+   * Método privado encargado de cargar un Funko a un fichero JSON
    * @param ID Identificador único del Funko
    * @param nombre Nombre del Funko
    * @param descripcion Descripcion del Funko

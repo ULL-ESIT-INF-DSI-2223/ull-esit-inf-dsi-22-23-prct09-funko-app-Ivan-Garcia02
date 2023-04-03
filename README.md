@@ -161,9 +161,14 @@ afterElementos(elementos: ElementoMochila[]) {
 }
 ```
 
+#### procesadorCSV.ts
+Este fichero contendrá la clase encargada de procesar el texto en formato CSV `ProcesadorCSV`. Dicha clase hereda de la clase plantilla `Procesar` y en esta implementamos los métodos abstractos de la clase padre. Para procesar la información de los ficheros usamos la función `readFileSync`, y en bucles `while` vamos avanzando hasta encontrarnos con saltos de linea `\n` y almacenar la informacion correspondiente a cada método.
 
-
-
+```typescript
+protected leerCapacidad(): number
+protected leerNumeroElementos(): number
+protected leerElementos(): ElementoMochila[]
+```
 
 ## Conclusiones
 En esta práctica hemos realizado varios ejercicios con los que hemos practicado los conceptos explicados en clase, sobre Node.js, la API síncrona proporcionada por Node.js para trabajar con el sistema de ficheros y los paquetes `yargs` y `chalk`.
